@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworkId": {
+            "value": "VNet1" 
+        },
+        "subnetName": {
+            "value": "Subnt-3" 
+        },
+        "virtualMachineName": {
+            "value": "ymvm1209_01"
+        },
+        "windowsOSVersion": {
+            "value": "2019-Datacenter"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_D2s_v3"
+        },
+        "domainToJoin": {
+            "value": "workshop1209.net"
+        },
+        "domainUsername": {
+            "value": "domainAdmin"
+        },
+        "domainPassword": {
+            "value": "Password.1!!" 
+        },
+        "adminUsername": {
+            "value": "AzureUser"
+        },
+        "adminPassword": {
+            "value": "Password.1!!"
+        }
+    }
+}
