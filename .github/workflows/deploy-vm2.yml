@@ -1,0 +1,41 @@
+name: YM Deploy Virtual Machine
+
+# Controls when the action will run. 
+on:
+  # 手動ワークフロー トリガー
+  workflow_dispatch:
+    # ワークフロー実行時に使用するパラメーターを定義
+    inputs:
+      # パラメーター名
+      resourceGroupName:
+        # ワークフロー実行時に画面に表示される名前
+        description: Resource Group Name
+        # 入力を必須に指定
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  deploy-virtual-machine:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Login to Azure
+        uses: azure/CLI@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Deploy ARM Template
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az deployment group create --resource-group ${{ github.event.inputs.resourceGroupName }} --template-file ./Hands-on-Lab/templates/deploy-vm-as-domain-member.json --parameters ./Hands-on-Lab/templates/deploy-vm-as-domain-member.parameters.json
+      - name: Azure logout
+        run: |
+          az logout
