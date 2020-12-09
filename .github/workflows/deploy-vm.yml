@@ -31,6 +31,11 @@ jobs:
       - name: Login to Azure
         uses: azure/CLI@v1
         with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Deploy ARM Template
+        uses: azure/CLI@v1
+        with:
           inlineScript: |
             az deployment group create --resource-group ${{ github.event.inputs.resourceGroupName }} --template-file ./Hands-on-Lab/templates/deploy-vm-as-domain-member.json --parameters deploy-vm-as-domain-member.parameters.json
 
