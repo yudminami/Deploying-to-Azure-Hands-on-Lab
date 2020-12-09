@@ -31,11 +31,10 @@ jobs:
       - name: Login to Azure
         uses: azure/CLI@v1
         with:
-        inlineScript: |
-          az deployment group create --resource-group ${{ github.event.inputs.resourceGroupName }} --template-file ./Hands-on-Lab/templates/deploy-vm-as-domain-member.json --parameters deploy-vm-as-domain-member.parameters.json
+        inlineScript: az deployment group create --resource-group ${{ github.event.inputs.resourceGroupName }} --template-file ./Hands-on-Lab/templates/deploy-vm-as-domain-member.json --parameters deploy-vm-as-domain-member.parameters.json
+
       - name: Azure logout
-        run: |
-          az logout
+        run: az logout
 
         
 
